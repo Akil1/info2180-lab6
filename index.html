@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <script src="//ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
+       <script>
+           window.onload = function() {
+             document.getElementById("search").addEventListener(
+                             "click", function(){
+                var box=document.getElementById("box").value            
+                // go out and get result from request.php
+                 new Ajax.Request("request.php?q="+box+"&all=true",
+                       {
+                          method: "get",
+                          onSuccess: doSomethingWithTheResult
+                         });
+                  
+           });
+function doSomethingWithTheResult(data) {
+                var div = document.getElementById('result');
+                if((data.responseXML)==null){   
+                        div.innerHTML = div.innerHTML + data.responseText;
+                }
+                else{
+                    div.innerHTML = div.innerHTML + data.responseText;
+                }
+    
+}
+           }                        
+       </script>
+        <title>Ajax Demo of Seach Button</title>
+    </head>
+    <body>
+            <input id ="box" type="text">
+            <button id="search">Search</button>
+            <br>
+            <div id ="result"></div>
+    </body>
+</html>
